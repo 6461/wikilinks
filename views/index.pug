@@ -2,4 +2,8 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Find the shortest path between two Wikipedia pages.
+  form(action='/wiki', method='post')
+    input#link-a(type='text', name='link_a', required='true')
+    input#link-b(type='text', name='link_b', required='true')
+    button(type='submit', name='action') Start!
