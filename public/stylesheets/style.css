@@ -8,8 +8,13 @@ a {
 }
 
 #task-log {
-  height: 20em;
-  width: 40em;
+  height: 16em;
+  width: 64em;
+}
+
+#result {
+  height: 16em;
+  width: 64em;
 }
 
 input[type="text"] {

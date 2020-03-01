@@ -1,21 +1,28 @@
 var express = require('express');
 var router = express.Router();
-const taskServer = require('../taskServer');
+const TaskServer = require('../taskServer');
 
 // GET request to get the next task.
 router.get('/', function(req, res, next) {
-	// TODO
-	console.log('get task');
+	const sub = TaskServer.getNextSubTask(req.connection.remoteAddress);
 	
-	// res.send('respond with a resource');
+	if (sub == null) {
+		res.json({status: 'done'});
+	} else {
+		res.json(sub);
+	}
 });
 
 // POST request to submit a completed task.
 router.post('/', function(req, res, next) {
-	// TODO
-	console.log('post task');
+	const page = req.body.page;
+	const links = req.body.links;
 	
-	// res.send('respond with a resource');
+	if (page.length > 0) {
+		TaskServer.process(page, links, req.connection.remoteAddress);
+	};
+	
+	res.status(202).json({status: 'ok'});
 });
 
 module.exports = router;
